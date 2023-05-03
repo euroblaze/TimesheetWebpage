@@ -36,7 +36,7 @@ This document outlines the specifications for a webpage that allows users to upd
 
 ## Technical Requirements
 
-- Use Odoo Portals as a base for the web application.
+- ~Use Odoo Portals as a base for the web application.~
 - Implement necessary security measures to protect user data.
 - Perform input validation to ensure only valid four-digit IDs are accepted.
 - Use AJAX (see the vue.js file Timesheet.vue) for seamless user experience without page reloads.
