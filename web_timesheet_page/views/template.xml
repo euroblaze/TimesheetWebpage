@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="timesheet_template">
+        <t t-call="website.layout">
+            <h2 style="text-align:center;">Timesheet</h2>
+            <div class="overlay"/>
+            <div class="container oe_main o_employee_timesheet_details" style="max-width: 800px;">
+                <form action="/create_timesheet" method="post" class="js_form" enctype="multipart/form-data">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    <div class="row">
+                        <div class="col-lg-6 mt-4">
+                            <strong>
+                                <label for="project_radio" name="project_radio">Project</label>
+                            </strong>
+                            <input type="radio" id="project_radio" name="task_type" value="project" checked="true"/>
+                            <br/>
+                            <strong>
+                                <label for="helpdesk_radio" name="helpdesk_radio">Helpdesk</label>
+                            </strong>
+                            <input type="radio" id="helpdesk_radio" name="task_type" value="helpdesk"/>
+                        </div>
+                        <div class="col-lg-6 mt-4">
+                        </div>
+                        <div class="col-lg-6">
+                            <i class="fa fa-times" id="icon_cross" aria-hidden="true" style="color: red; display: none;"/>
+                            <strong>
+                                <label for="employee_code" name="employee_code">Employee Code</label>
+                            </strong>
+                            <input type="text" class="form-control" id="employee_code" name="employee_code"/>
+                        </div>
+                        <div class="col-lg-6 mt-4">
+                        </div>
+                        <div class="col-lg-6" id="tickets_id" style="display:none;">
+                            <label class="col-form-label" for="ticket_id">Ticket</label>
+                            <select name="ticket_id" class="form-control">
+                                <option value="">Ticket...</option>
+                                <t t-foreach="request.env['helpdesk.ticket'].sudo().search([])" t-as="ticket">
+                                    <option t-att-value="ticket.id">
+                                        <t t-esc="ticket.name"/>
+                                    </option>
+                                </t>
+                            </select>
+                        </div>
+                        <div class="col-lg-6" id="projects_id">
+                            <label class="col-form-label label-optional" for="project_id">
+                                <strong>Project</strong>
+                            </label>
+                            <select id="select_project" name="project_id" class="form-control">
+                                <option value="">Project...</option>
+                                <t t-foreach="request.env['project.project'].sudo().search([])" t-as="project">
+                                    <option t-att-value="project.id">
+                                        <t t-esc="project.name"/>
+                                    </option>
+                                </t>
+                            </select>
+                        </div>
+                        <div class="col-lg-6" id="tasks_id">
+                            <label class="col-form-label label-optional" for="task_id">
+                                <strong>Task</strong>
+                            </label>
+                            <select id="select_task" name="task_id" class="form-control">
+                            </select>
+                        </div>
+                        <div class="col-lg-12 mt-4">
+                            <strong>
+                                <label for="description" name="description">Description:</label>
+                            </strong>
+                            <textarea type="textbox" class="form-control" id="description" name="description"/>
+                        </div>
+                        <div class="col-lg-12 mt-3 mb-4">
+                            <h4>Timer:</h4>
+                            <div id="timer" name="timer"/>
+                            <button type="button" class="btn btn-primary" id="start" disabled="disabled">Start</button>
+                            <button type="submit" role="button" class="btn btn-secondary" id="stop" disabled="disabled">Stop
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </t>
+    </template>
+
+    <template id="timesheet_success" name="Task Ticket Timesheet Success">
+        <t t-call="website.layout">
+            <div class="container oe_main" style="text-align:center;max-width: 800px;">
+                <img src="/web_timesheet_page/static/src/img/done.png" width="90" height="90"
+                     style="max-width: 90px; max-height: 90px;">
+                </img>
+                <br/>
+                <br/>
+                <h2>Thank You</h2>
+                <hr/>
+                <h4>Your Request for timesheet has been successfully Submitted</h4>
+            </div>
+        </t>
+    </template>
+
+    <template id="timesheet_fail" name="Task Ticket Timesheet Failure">
+        <t t-call="website.layout">
+            <div class="container oe_main" style="text-align:center;max-width: 800px;">
+                <img src="/web_timesheet_page/static/src/img/cross.png" width="90" height="90"
+                     style="max-width: 90px; max-height: 90px;">
+                </img>
+                <br/>
+                <br/>
+                <h2>Something went wrong !!</h2>
+                <hr/>
+                <h4>Please fill up your data carefully to log the timesheet.</h4>
+            </div>
+        </t>
+    </template>
+
+</odoo>
