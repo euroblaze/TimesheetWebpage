@@ -5,7 +5,7 @@ from odoo import fields, api, models, _
 class HrEmployee(models.Model):
 	_inherit = 'hr.employee'
 
-	employee_code = fields.Integer('Employee Code', related="user_id.employee_code", readonly=False)
+	employee_code = fields.Integer('Employee Code')
 
 	@api.model
 	def check_employee_code(self, employee_code):

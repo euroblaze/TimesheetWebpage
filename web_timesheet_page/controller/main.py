@@ -26,7 +26,10 @@ class TimesheetController(http.Controller):
 			line_dict.update({
 				'name': kw.get('description') or '',
 				'unit_amount': float(total_seconds) / 3600.0,
+                                'employee_id': employee.id
+
 			})
+			#request.env['account.analytic.line'].with_user(admin_user).create(line_dict)
 			request.env['account.analytic.line'].sudo().create(line_dict)
 			return request.redirect('/timesheet_success_page')
 		return request.redirect('/timesheet_fail')
