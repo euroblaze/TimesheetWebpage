@@ -1,3 +1,11 @@
+### Problems with this Module
+
+1. It doesn't work on v15 Community.
+2. It's not compatible with the [Helpdesk]([url](https://github.com/euroblaze/Helpdesk)) module.
+3. It's not compatible with the [TicketMerge]([url](https://github.com/euroblaze/TicketMerge)) module.
+
+Essentially, the TimesheetWebpage module works, under some conditions, as an island solution, desolated from its process dependencies.
+
 # Odoo Timesheet Webpage
 
 This is a single-page web application developed using Vue.js for tracking time and booking it on specific tasks or tickets in Odoo. The application is designed to simplify the time tracking process for users, allowing them to enter a 4-digit ID instead of a username and password.
